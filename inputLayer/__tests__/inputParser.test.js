@@ -27,11 +27,11 @@ describe("InputParser", () => {
     });
   });
   describe("instructionParser()", () => {
-    test("converts 'lmRLMM' into correct format for plateau size", () => {
+    test("converts 'lmRLMM' into correct format for instructions", () => {
       const instructions = parse.instructionParser("lmRLMM");
       expect(instructions).toEqual(["L", "M", "R", "L", "M", "M"]);
     });
-    test("converts 'lmRLXMM' into correct format for plateau size", () => {
+    test("throws error for invalid input for instructions", () => {
       expect(() => parse.instructionParser("lmRLXMM")).toThrow(
         "Invalid instructions",
       );
