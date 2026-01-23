@@ -5,10 +5,10 @@ const PlateauSize = require("../plateauSize");
 const InputParser = require("../inputLayer/inputParser");
 
 class Rover {
-  constructor(posX, posY, facing) {
-    this.posX = posX;
-    this.posY = posY;
-    this.facing = facing;
+  constructor(positionObject) {
+    this.posX = positionObject.X;
+    this.posY = positionObject.Y;
+    this.facing = positionObject.facingDirection;
   }
 
   rotate(directionUpdate) {
@@ -33,17 +33,26 @@ class Rover {
     }
     switch (this.facing) {
       case Direction.N:
-        this.posX++;
-        break;
-      case Direction.E:
         this.posY++;
         break;
+      case Direction.E:
+        this.posX++;
+        break;
       case Direction.S:
-        this.posX--;
+        this.posY--;
         break;
       default:
-        this.posY--;
+        this.posX--;
     }
+  }
+  control(instructionArr) {
+    instructionArr.forEach((ele) => {
+      if (ele === "Instruction.MOVE") {
+        this.move(eval(ele));
+      } else {
+        this.rotate(eval(ele));
+      }
+    });
   }
 }
 
