@@ -27,12 +27,21 @@ describe("InputParser", () => {
     });
   });
   describe("instructionParser()", () => {
-    test("converts 'lmRLMM' into correct format for instructions", () => {
-      const instructions = parse.instructionParser("lmRLMM");
-      expect(instructions).toEqual(["L", "M", "R", "L", "M", "M"]);
+    test("converts 'lmrrlmmr' into correct format for instructions", () => {
+      const instructions = parse.instructionParser("lmrrlmmr");
+      expect(instructions).toEqual([
+        "Instruction.LEFT",
+        "Instruction.MOVE",
+        "Instruction.RIGHT",
+        "Instruction.RIGHT",
+        "Instruction.LEFT",
+        "Instruction.MOVE",
+        "Instruction.MOVE",
+        "Instruction.RIGHT",
+      ]);
     });
     test("throws error for invalid input for instructions", () => {
-      expect(() => parse.instructionParser("lmRLXMM")).toThrow(
+      expect(() => parse.instructionParser("lmrrxlmmr")).toThrow(
         "Invalid instructions",
       );
     });

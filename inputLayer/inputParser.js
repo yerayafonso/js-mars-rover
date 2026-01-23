@@ -32,15 +32,22 @@ class InputParser {
   instructionParser(rawInput) {
     const parts = rawInput.trim().toUpperCase().split("");
 
+    const keys = Object.keys(Instruction);
+    const values = Object.values(Instruction);
+
     const validInstructions = parts
-      .map((ele) =>
-        ele === Instruction.LEFT
-          ? Instruction.LEFT
-          : ele === Instruction.RIGHT
-            ? Instruction.RIGHT
-            : ele === Instruction.MOVE
-              ? Instruction.MOVE
-              : null,
+      .map(
+        (ele) =>
+          values.indexOf(ele) >= 0 && values.indexOf(ele) <= 2
+            ? `Instruction.${keys[values.indexOf(ele)]}`
+            : null,
+        // ele === Instruction.LEFT
+        //   ? Instruction.LEFT
+        //   : ele === Instruction.RIGHT
+        //     ? Instruction.RIGHT
+        //     : ele === Instruction.MOVE
+        //       ? Instruction.MOVE
+        //       : null,
       )
       .filter((ele) => ele);
     if (validInstructions.length !== parts.length) {
