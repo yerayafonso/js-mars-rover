@@ -5,4 +5,4 @@ const Direction = Object.freeze({
   W: "W",
 });
 
-module.export = Direction;
+module.exports = Direction;

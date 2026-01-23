@@ -1,0 +1,22 @@
+const Direction = require("/home/yerayafonso/Northcoders/fundamentals/js-mars-rover/direction.js");
+const Instruction = require("/home/yerayafonso/Northcoders/fundamentals/js-mars-rover/instruction.js");
+const Position = require("/home/yerayafonso/Northcoders/fundamentals/js-mars-rover/positionClass.js");
+const PlateauSize = require("/home/yerayafonso/Northcoders/fundamentals/js-mars-rover/plateauSize.js");
+const Rover = require("../roverClass");
+
+describe("Rover Class", () => {
+  test("Rover rotate right when facing north", () => {
+    let rover = new Rover(2, 2, "N");
+    rover.rotate(Instruction.RIGHT);
+    expect(rover.facing === Direction.E).toBe(true);
+  });
+  test("rover can rotate left when facing east", () => {
+    let rover = new Rover(0, 0, Direction.E);
+    rover.rotate(Instruction.LEFT);
+    expect(rover.facing === Direction.N).toBe(true);
+  });
+  test("throws error for invalid rotation", () => {
+    let rover = new Rover(0, 0, Direction.E);
+    expect(() => rover.rotate(Instruction.MOVE)).toThrow();
+  });
+});
