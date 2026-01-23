@@ -27,6 +27,24 @@ class Rover {
     index = (index + 4) % 4;
     this.facing = values[index];
   }
+  move(movementUpdate) {
+    if (movementUpdate !== Instruction.MOVE) {
+      throw new Error("Invalid Instruction");
+    }
+    switch (this.facing) {
+      case Direction.N:
+        this.posX++;
+        break;
+      case Direction.E:
+        this.posY++;
+        break;
+      case Direction.S:
+        this.posX--;
+        break;
+      default:
+        this.posY--;
+    }
+  }
 }
 
 module.exports = Rover;
