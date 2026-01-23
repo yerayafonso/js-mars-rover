@@ -1,6 +1,8 @@
 class PlateauSize {
-  constructor(x_limit, y_limit) {
-    this.x_limit = x_limit;
-    this.y_limit = y_limit;
+  constructor(maxX, maxY) {
+    this.maxX = maxX;
+    this.maxY = maxY;
   }
 }
+
+module.exports = PlateauSize;
