@@ -55,6 +55,7 @@ class Rover {
     const plateau = getPlateau();
     const storeX = this.posX;
     const storeY = this.posY;
+    const storeDir = this.facing;
     instructionArr.forEach((ele) => {
       if (ele === "Instruction.MOVE") {
         this.move(eval(ele));
@@ -71,6 +72,7 @@ class Rover {
     ) {
       this.posX = storeX;
       this.posY = storeY;
+      this.facing = storeDir;
       console.log(
         "Rover cannot go to those coordinates, enter new instructions",
       );
