@@ -9,6 +9,7 @@ describe("Rover Class", () => {
   describe("Rover Rotation", () => {
     test("Rover rotate right when facing north", () => {
       let parse = new InputParser();
+      parse.plateauParser("10 10");
       const position = parse.positionParser("2 2 n");
       let rover = new Rover(position);
       rover.rotate(Instruction.RIGHT);
@@ -16,6 +17,7 @@ describe("Rover Class", () => {
     });
     test("rover can rotate left when facing east", () => {
       let parse = new InputParser();
+      parse.plateauParser("10 10");
       const position = parse.positionParser("0 0 e");
       let rover = new Rover(position);
       rover.rotate(Instruction.LEFT);
@@ -23,6 +25,7 @@ describe("Rover Class", () => {
     });
     test("throws error for invalid rotation", () => {
       let parse = new InputParser();
+      parse.plateauParser("10 10");
       const position = parse.positionParser("0 0 e");
       let rover = new Rover(position);
       expect(() => rover.rotate(Instruction.MOVE)).toThrow();
@@ -31,6 +34,7 @@ describe("Rover Class", () => {
   describe("Rover Movement", () => {
     test("Rover moves when facing north", () => {
       let parse = new InputParser();
+      parse.plateauParser("10 10");
       const position = parse.positionParser("2 2 n");
       let rover = new Rover(position);
       rover.move(Instruction.MOVE);
@@ -38,6 +42,7 @@ describe("Rover Class", () => {
     });
     test("rover moves when facing east", () => {
       let parse = new InputParser();
+      parse.plateauParser("10 10");
       const position = parse.positionParser("0 0 E");
       let rover = new Rover(position);
       rover.move(Instruction.MOVE);
@@ -45,6 +50,7 @@ describe("Rover Class", () => {
     });
     test("rover moves when facing south", () => {
       let parse = new InputParser();
+      parse.plateauParser("10 10");
       const position = parse.positionParser("2 2 s");
       let rover = new Rover(position);
       rover.move(Instruction.MOVE);
@@ -52,6 +58,7 @@ describe("Rover Class", () => {
     });
     test("rover moves when facing east", () => {
       let parse = new InputParser();
+      parse.plateauParser("10 10");
       const position = parse.positionParser("2 2 w");
       let rover = new Rover(position);
       rover.move(Instruction.MOVE);
@@ -59,6 +66,7 @@ describe("Rover Class", () => {
     });
     test("throws error for invalid movement", () => {
       let parse = new InputParser();
+      parse.plateauParser("10 10");
       const position = parse.positionParser("0 0 E");
       let rover = new Rover(position);
       expect(() => rover.move(Instruction.RIGHT)).toThrow();
@@ -68,6 +76,7 @@ describe("Rover Class", () => {
   describe("Rover Control", () => {
     test("Rover position updates with multiple movement instructions", () => {
       let parse = new InputParser();
+      parse.plateauParser("10 10");
       const position = parse.positionParser("2 2 n");
       let rover = new Rover(position);
       const instructions = parse.instructionParser("MmM");
@@ -78,6 +87,7 @@ describe("Rover Class", () => {
     });
     test("Rover direction updates with multiple rotation instructions", () => {
       let parse = new InputParser();
+      parse.plateauParser("10 10");
       const position = parse.positionParser("2 2 n");
       let rover = new Rover(position);
       const instructions = parse.instructionParser("RRlr");
@@ -89,6 +99,7 @@ describe("Rover Class", () => {
 
     test("Rover position updates with single movement and rotation instructions", () => {
       let parse = new InputParser();
+      parse.plateauParser("10 10");
       const position = parse.positionParser("2 2 n");
       let rover = new Rover(position);
       const instructions = parse.instructionParser("mR");

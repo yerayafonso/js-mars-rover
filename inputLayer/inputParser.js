@@ -2,6 +2,10 @@ const Direction = require("../direction");
 const Instruction = require("../instruction");
 const Position = require("../positionClass");
 const PlateauSize = require("../plateauSize");
+const {
+  setPlateau,
+  getPlateau,
+} = require("/home/yerayafonso/Northcoders/fundamentals/js-mars-rover/plateauStore.js");
 
 class InputParser {
   constructor(userInput) {
@@ -18,7 +22,10 @@ class InputParser {
     const maxX = Number(parts[0]);
     const maxY = Number(parts[1]);
 
-    return new PlateauSize(maxX, maxY);
+    const plateau = new PlateauSize(maxX, maxY);
+    setPlateau(plateau);
+
+    return plateau;
   }
   positionParser(rawInput) {
     const parts = rawInput.trim().split(/\s+/);
