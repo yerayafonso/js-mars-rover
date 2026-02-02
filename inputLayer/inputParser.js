@@ -28,13 +28,26 @@ class InputParser {
     return plateau;
   }
   positionParser(rawInput) {
+    const plateau = getPlateau();
     const parts = rawInput.trim().split(/\s+/);
 
     const X = Number(parts[0]);
     const Y = Number(parts[1]);
+    if (X > plateau.maxX || Y > plateau.maxY || X < 0 || Y < 0) {
+      const err = new Error("Invalid input");
+      err.name = "InputError";
+      throw err;
+    }
     const facingDirection = parts[2].toUpperCase();
+    if (!/[NEWS]/.test(facingDirection)) {
+      const err = new Error("Invalid input");
+      err.name = "InputError";
+      throw err;
+    }
 
-    return new Position(X, Y, facingDirection);
+    const position = new Position(X, Y, facingDirection);
+
+    return position;
   }
   instructionParser(rawInput) {
     const parts = rawInput.trim().toUpperCase().split("");
@@ -43,23 +56,15 @@ class InputParser {
     const values = Object.values(Instruction);
 
     const validInstructions = parts
-      .map(
-        (ele) =>
-          values.indexOf(ele) >= 0 && values.indexOf(ele) <= 2
-            ? `Instruction.${keys[values.indexOf(ele)]}`
-            : null,
-        // ele === Instruction.LEFT
-        //   ? Instruction.LEFT
-        //   : ele === Instruction.RIGHT
-        //     ? Instruction.RIGHT
-        //     : ele === Instruction.MOVE
-        //       ? Instruction.MOVE
-        //       : null,
+      .map((ele) =>
+        values.indexOf(ele) >= 0 && values.indexOf(ele) <= 2
+          ? `Instruction.${keys[values.indexOf(ele)]}`
+          : null,
       )
       .filter((ele) => ele);
-    if (validInstructions.length !== parts.length) {
-      throw new Error("Invalid instructions");
-    }
+    // if (validInstructions.length !== parts.length) {
+    //   throw new Error("Invalid instructions");
+    // }
 
     return validInstructions;
   }

@@ -3,13 +3,10 @@ const Instruction = require("../instruction");
 const Position = require("../positionClass");
 const PlateauSize = require("../plateauSize");
 const InputParser = require("../inputLayer/inputParser");
-const {
-  setPlateau,
-  getPlateau,
-} = require("/home/yerayafonso/Northcoders/fundamentals/js-mars-rover/plateauStore.js");
+const { setPlateau, getPlateau } = require("../plateauStore.js");
 
 class Rover {
-  constructor(positionObject, plateau) {
+  constructor(positionObject) {
     this.posX = positionObject.X;
     this.posY = positionObject.Y;
     this.facing = positionObject.facingDirection;
@@ -33,10 +30,10 @@ class Rover {
   }
   move(movementUpdate) {
     if (movementUpdate !== Instruction.MOVE) {
-      throw new Error("Invalid Instruction");
+      const err = new Error("Invalid Instruction");
+      err.name = "InputError";
+      throw err;
     }
-    const storeX = this.posX;
-    const storeY = this.posY;
     switch (this.facing) {
       case Direction.N:
         this.posY += 1;
@@ -73,9 +70,9 @@ class Rover {
       this.posX = storeX;
       this.posY = storeY;
       this.facing = storeDir;
-      console.log(
-        "Rover cannot go to those coordinates, enter new instructions",
-      );
+      const err2 = new Error();
+      err2.name = "InstructionError";
+      throw err2;
     }
   }
 }
